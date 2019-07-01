@@ -5,19 +5,19 @@ using System.Linq;
 namespace TauCode.Validation.Test
 {
     [TestFixture]
-    public class LoginValidatorTest
+    public class UsernameValidatorTest
     {
         public class Dto
         {
-            public string TheLogin { get; set; }
+            public string MyUsername { get; set; }
         }
 
         public class DtoValidator : AbstractValidator<Dto>
         {
             public DtoValidator()
             {
-                this.RuleFor(x => x.TheLogin)
-                    .Login(2, 10);
+                this.RuleFor(x => x.MyUsername)
+                    .Username(2, 10);
             }
         }
 
@@ -26,7 +26,7 @@ namespace TauCode.Validation.Test
         [TestCase("admin")]
         [TestCase("1and1")]
         [TestCase("1and1_go")]
-        public void Validate_ValidLogin_Ok(string login)
+        public void Validate_ValidUsername_Ok(string username)
         {
             // Arrange
             var validator = new DtoValidator();
@@ -34,7 +34,7 @@ namespace TauCode.Validation.Test
             // Act
             var dto = new Dto
             {
-                TheLogin = login,
+                MyUsername = username,
             };
 
             var result = validator.Validate(dto);
@@ -49,7 +49,7 @@ namespace TauCode.Validation.Test
         [TestCase("admin-2")]
         [TestCase(" aka")]
         [TestCase("оля")]
-        public void Validate_InvalidLogin_Error(string login)
+        public void Validate_InvalidUsername_Error(string username)
         {
             // Arrange
             var validator = new DtoValidator();
@@ -57,7 +57,7 @@ namespace TauCode.Validation.Test
             // Act
             var dto = new Dto
             {
-                TheLogin = login,
+                MyUsername = username,
             };
 
             var result = validator.Validate(dto);
@@ -65,8 +65,8 @@ namespace TauCode.Validation.Test
             // Assert
             Assert.That(result.IsValid, Is.False);
             var error = result.Errors.Single();
-            Assert.That(error.ErrorCode, Is.EqualTo("LoginValidator"));
-            Assert.That(error.ErrorMessage, Is.EqualTo("'The Login' must be a valid login."));
+            Assert.That(error.ErrorCode, Is.EqualTo("UsernameValidator"));
+            Assert.That(error.ErrorMessage, Is.EqualTo("'My Username' must be a valid username."));
         }
     }
 }

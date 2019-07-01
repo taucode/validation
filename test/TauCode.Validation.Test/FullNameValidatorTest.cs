@@ -5,7 +5,7 @@ using System.Linq;
 namespace TauCode.Validation.Test
 {
     [TestFixture]
-    public class NameValidatorTest
+    public class FullNameValidatorTest
     {
         public class Dto
         {
@@ -17,7 +17,7 @@ namespace TauCode.Validation.Test
             public DtoValidator()
             {
                 this.RuleFor(x => x.TheName)
-                    .Name(2, 10);
+                    .FullName(2, 10);
             }
         }
 
@@ -63,8 +63,8 @@ namespace TauCode.Validation.Test
             // Assert
             Assert.That(result.IsValid, Is.False);
             var error = result.Errors.Single();
-            Assert.That(error.ErrorCode, Is.EqualTo("NameValidator"));
-            Assert.That(error.ErrorMessage, Is.EqualTo("'The Name' must be a valid name."));
+            Assert.That(error.ErrorCode, Is.EqualTo("FullNameValidator"));
+            Assert.That(error.ErrorMessage, Is.EqualTo("'The Name' must be a valid full name."));
         }
     }
 }

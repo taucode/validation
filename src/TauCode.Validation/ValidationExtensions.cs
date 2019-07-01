@@ -106,7 +106,7 @@ namespace TauCode.Validation
                 digitsAllowed));
         }
 
-        public static IRuleBuilderOptions<T, string> Name<T>(
+        public static IRuleBuilderOptions<T, string> FullName<T>(
             this IRuleBuilder<T, string> ruleBuilder,
             int minLength,
             int maxLength)
