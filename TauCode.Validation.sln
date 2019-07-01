@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29020.237
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{4498042D-8C36-4249-B0B7-E367CB888473}"
+	ProjectSection(SolutionItems) = preProject
+		misc\changelog.txt = misc\changelog.txt
+		misc\todo.txt = misc\todo.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{835A9989-BF09-404E-A5BD-90CAB2F64A62}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4BCF695F-B9F7-47DE-A1A2-26A042715A88}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{EB4F63AF-606B-46D3-A4FD-16CE42D3FC8C}"
+	ProjectSection(SolutionItems) = preProject
+		nuget\TauCode.Validation.nuspec = nuget\TauCode.Validation.nuspec
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TauCode.Validation", "src\TauCode.Validation\TauCode.Validation.csproj", "{EDFEC1BD-BD0F-4B91-8BAD-2B10105629DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TauCode.Validation.Test", "test\TauCode.Validation.Test\TauCode.Validation.Test.csproj", "{DED3786F-DB70-4C48-9B6A-D036E9F76BA6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDFEC1BD-BD0F-4B91-8BAD-2B10105629DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDFEC1BD-BD0F-4B91-8BAD-2B10105629DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDFEC1BD-BD0F-4B91-8BAD-2B10105629DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDFEC1BD-BD0F-4B91-8BAD-2B10105629DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DED3786F-DB70-4C48-9B6A-D036E9F76BA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DED3786F-DB70-4C48-9B6A-D036E9F76BA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DED3786F-DB70-4C48-9B6A-D036E9F76BA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DED3786F-DB70-4C48-9B6A-D036E9F76BA6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EDFEC1BD-BD0F-4B91-8BAD-2B10105629DA} = {4BCF695F-B9F7-47DE-A1A2-26A042715A88}
+		{DED3786F-DB70-4C48-9B6A-D036E9F76BA6} = {835A9989-BF09-404E-A5BD-90CAB2F64A62}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D954ACA-17C0-404A-965F-4EE2399D3460}
+	EndGlobalSection
+EndGlobal
