@@ -3,12 +3,12 @@ using System;
 
 namespace TauCode.Validation
 {
-    public class NameValidator : PropertyValidator
+    public class FullNameValidator : PropertyValidator
     {
         protected int MinLength { get; }
         protected int MaxLength { get; }
 
-        public NameValidator(int minLength, int maxLength, string message)
+        public FullNameValidator(int minLength, int maxLength, string message)
             : base(message)
         {
             if (minLength <= 0)
@@ -25,8 +25,8 @@ namespace TauCode.Validation
             this.MaxLength = maxLength;
         }
 
-        public NameValidator(int minLength, int maxLength)
-            : this(minLength, maxLength, "'{PropertyName}' must be a valid name.")
+        public FullNameValidator(int minLength, int maxLength)
+            : this(minLength, maxLength, "'{PropertyName}' must be a valid full name.")
         {
         }
 

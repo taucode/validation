@@ -111,7 +111,7 @@ namespace TauCode.Validation
             int minLength,
             int maxLength)
         {
-            return ruleBuilder.SetValidator(new NameValidator(
+            return ruleBuilder.SetValidator(new FullNameValidator(
                 minLength,
                 maxLength));
         }
