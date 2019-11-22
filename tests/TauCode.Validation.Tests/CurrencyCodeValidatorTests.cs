@@ -5,7 +5,7 @@ using System.Linq;
 namespace TauCode.Validation.Tests
 {
     [TestFixture]
-    public class CurrencyCodeValidatorTest
+    public class CurrencyCodeValidatorTests
     {
         public class Dto
         {

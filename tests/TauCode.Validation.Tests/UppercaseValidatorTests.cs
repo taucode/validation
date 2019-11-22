@@ -5,28 +5,28 @@ using System.Linq;
 namespace TauCode.Validation.Tests
 {
     [TestFixture]
-    public class WebCodeValidatorTest
+    public class UppercaseValidatorTests
     {
         public class Dto
         {
-            public string TheWebCode { get; set; }
+            public string TheCode { get; set; }
         }
 
         public class DtoValidator : AbstractValidator<Dto>
         {
             public DtoValidator()
             {
-                this.RuleFor(x => x.TheWebCode)
-                    .WebCode(2, 20);
+                this.RuleFor(x => x.TheCode)
+                    .UppercaseCode(2, 20);
             }
         }
 
         [Test]
         [TestCase(null)]
-        [TestCase("ak")]
-        [TestCase("some-note")]
-        [TestCase("1st-good-girl90")]
-        public void Validate_ValidWebCode_Ok(string webCode)
+        [TestCase("AK")]
+        [TestCase("SOME_NOTE")]
+        [TestCase("1ST_GOOD_GIRL90")]
+        public void Validate_ValidCode_Ok(string code)
         {
             // Arrange
             var validator = new DtoValidator();
@@ -34,7 +34,7 @@ namespace TauCode.Validation.Tests
             // Act
             var dto = new Dto
             {
-                TheWebCode = webCode,
+                TheCode = code,
             };
 
             var result = validator.Validate(dto);
@@ -45,14 +45,14 @@ namespace TauCode.Validation.Tests
 
         [Test]
         [TestCase("")]
-        [TestCase("a")]
-        [TestCase("a-", Description = "Ends with separator")]
-        [TestCase("a--b", Description = "Two separators in a row")]
-        [TestCase("-a-b", Description = "Starts with separator")]
-        [TestCase("tooooooooooooo-looooooooooong")]
-        [TestCase("оля")]
-        [TestCase("tag1,tag2")]
-        public void Validate_InvalidWebCode_Error(string webCode)
+        [TestCase("A")]
+        [TestCase("A_", Description = "Ends with separator")]
+        [TestCase("A__B", Description = "Two separators in a row")]
+        [TestCase("_A_B", Description = "Starts with separator")]
+        [TestCase("TOOOOOOOOOOOOO_LOOOOOOOOOOONG")]
+        [TestCase("ОЛЯ")]
+        [TestCase("SOME_NoTE")]
+        public void Validate_InvalidCode_Error(string code)
         {
             // Arrange
             var validator = new DtoValidator();
@@ -60,7 +60,7 @@ namespace TauCode.Validation.Tests
             // Act
             var dto = new Dto
             {
-                TheWebCode = webCode,
+                TheCode = code,
             };
 
             var result = validator.Validate(dto);
@@ -68,9 +68,8 @@ namespace TauCode.Validation.Tests
             // Assert
             Assert.That(result.IsValid, Is.False);
             var error = result.Errors.Single();
-            Assert.That(error.ErrorCode, Is.EqualTo("WebCodeValidator"));
-            Assert.That(error.ErrorMessage, Is.EqualTo("'The Web Code' must be a valid web code."));
+            Assert.That(error.ErrorCode, Is.EqualTo("UppercaseCodeValidator"));
+            Assert.That(error.ErrorMessage, Is.EqualTo("'The Code' must be a valid uppercase code."));
         }
-
     }
 }

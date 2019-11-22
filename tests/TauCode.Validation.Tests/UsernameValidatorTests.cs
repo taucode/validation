@@ -5,28 +5,28 @@ using System.Linq;
 namespace TauCode.Validation.Tests
 {
     [TestFixture]
-    public class FullNameValidatorTest
+    public class UsernameValidatorTests
     {
         public class Dto
         {
-            public string TheName { get; set; }
+            public string MyUsername { get; set; }
         }
 
         public class DtoValidator : AbstractValidator<Dto>
         {
             public DtoValidator()
             {
-                this.RuleFor(x => x.TheName)
-                    .FullName(2, 10);
+                this.RuleFor(x => x.MyUsername)
+                    .Username(2, 10);
             }
         }
 
         [Test]
-        [TestCase(null)]
         [TestCase("ak")]
-        [TestCase("Оля")]
-        [TestCase("er ein årl")]
-        public void Validate_ValidName_Ok(string name)
+        [TestCase("admin")]
+        [TestCase("1and1")]
+        [TestCase("1and1_go")]
+        public void Validate_ValidUsername_Ok(string username)
         {
             // Arrange
             var validator = new DtoValidator();
@@ -34,7 +34,7 @@ namespace TauCode.Validation.Tests
             // Act
             var dto = new Dto
             {
-                TheName = name,
+                MyUsername = username,
             };
 
             var result = validator.Validate(dto);
@@ -44,10 +44,12 @@ namespace TauCode.Validation.Tests
         }
 
         [Test]
-        [TestCase(" admin-2")]
-        [TestCase("оля ")]
-        [TestCase("Очень длинное имя")]
-        public void Validate_InvalidName_Error(string name)
+        [TestCase("a")]
+        [TestCase("tooooooooooooo_looooooooooong")]
+        [TestCase("admin-2")]
+        [TestCase(" aka")]
+        [TestCase("оля")]
+        public void Validate_InvalidUsername_Error(string username)
         {
             // Arrange
             var validator = new DtoValidator();
@@ -55,7 +57,7 @@ namespace TauCode.Validation.Tests
             // Act
             var dto = new Dto
             {
-                TheName = name,
+                MyUsername = username,
             };
 
             var result = validator.Validate(dto);
@@ -63,8 +65,8 @@ namespace TauCode.Validation.Tests
             // Assert
             Assert.That(result.IsValid, Is.False);
             var error = result.Errors.Single();
-            Assert.That(error.ErrorCode, Is.EqualTo("FullNameValidator"));
-            Assert.That(error.ErrorMessage, Is.EqualTo("'The Name' must be a valid full name."));
+            Assert.That(error.ErrorCode, Is.EqualTo("UsernameValidator"));
+            Assert.That(error.ErrorMessage, Is.EqualTo("'My Username' must be a valid username."));
         }
     }
 }

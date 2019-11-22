@@ -5,28 +5,28 @@ using System.Linq;
 namespace TauCode.Validation.Tests
 {
     [TestFixture]
-    public class UppercaseValidatorTest
+    public class FullNameValidatorTests
     {
         public class Dto
         {
-            public string TheCode { get; set; }
+            public string TheName { get; set; }
         }
 
         public class DtoValidator : AbstractValidator<Dto>
         {
             public DtoValidator()
             {
-                this.RuleFor(x => x.TheCode)
-                    .UppercaseCode(2, 20);
+                this.RuleFor(x => x.TheName)
+                    .FullName(2, 10);
             }
         }
 
         [Test]
         [TestCase(null)]
-        [TestCase("AK")]
-        [TestCase("SOME_NOTE")]
-        [TestCase("1ST_GOOD_GIRL90")]
-        public void Validate_ValidCode_Ok(string code)
+        [TestCase("ak")]
+        [TestCase("Оля")]
+        [TestCase("er ein årl")]
+        public void Validate_ValidName_Ok(string name)
         {
             // Arrange
             var validator = new DtoValidator();
@@ -34,7 +34,7 @@ namespace TauCode.Validation.Tests
             // Act
             var dto = new Dto
             {
-                TheCode = code,
+                TheName = name,
             };
 
             var result = validator.Validate(dto);
@@ -44,15 +44,10 @@ namespace TauCode.Validation.Tests
         }
 
         [Test]
-        [TestCase("")]
-        [TestCase("A")]
-        [TestCase("A_", Description = "Ends with separator")]
-        [TestCase("A__B", Description = "Two separators in a row")]
-        [TestCase("_A_B", Description = "Starts with separator")]
-        [TestCase("TOOOOOOOOOOOOO_LOOOOOOOOOOONG")]
-        [TestCase("ОЛЯ")]
-        [TestCase("SOME_NoTE")]
-        public void Validate_InvalidCode_Error(string code)
+        [TestCase(" admin-2")]
+        [TestCase("оля ")]
+        [TestCase("Очень длинное имя")]
+        public void Validate_InvalidName_Error(string name)
         {
             // Arrange
             var validator = new DtoValidator();
@@ -60,7 +55,7 @@ namespace TauCode.Validation.Tests
             // Act
             var dto = new Dto
             {
-                TheCode = code,
+                TheName = name,
             };
 
             var result = validator.Validate(dto);
@@ -68,8 +63,8 @@ namespace TauCode.Validation.Tests
             // Assert
             Assert.That(result.IsValid, Is.False);
             var error = result.Errors.Single();
-            Assert.That(error.ErrorCode, Is.EqualTo("UppercaseCodeValidator"));
-            Assert.That(error.ErrorMessage, Is.EqualTo("'The Code' must be a valid uppercase code."));
+            Assert.That(error.ErrorCode, Is.EqualTo("FullNameValidator"));
+            Assert.That(error.ErrorMessage, Is.EqualTo("'The Name' must be a valid full name."));
         }
     }
 }
