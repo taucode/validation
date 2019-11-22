@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TauCode.Validation.Test
+namespace TauCode.Validation.Tests
 {
     [TestFixture]
-    public class CodeValidatorTest
+    public class CodeValidatorTests
     {
         private static readonly char[] Alphabet;
         private static readonly char[] Separators = { '-', '_' };
@@ -16,7 +16,7 @@ namespace TauCode.Validation.Test
         private static int MinLength;
         private static int MaxLength;
 
-        static CodeValidatorTest()
+        static CodeValidatorTests()
         {
             var smallLetters = Enumerable
                 .Range('a', 'z' - 'a' + 1)

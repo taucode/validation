@@ -4,10 +4,10 @@ using System;
 using System.Linq;
 using TauCode.Utils.Extensions;
 
-namespace TauCode.Validation.Test
+namespace TauCode.Validation.Tests
 {
     [TestFixture]
-    public class ExactDateValidatorTest
+    public class ExactDateValidatorTests
     {
         private static DateTime? MinDate;
         private static DateTime? MaxDate;

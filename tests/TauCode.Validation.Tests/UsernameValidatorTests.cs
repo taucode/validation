@@ -2,31 +2,31 @@
 using NUnit.Framework;
 using System.Linq;
 
-namespace TauCode.Validation.Test
+namespace TauCode.Validation.Tests
 {
     [TestFixture]
-    public class WebCodeValidatorTest
+    public class UsernameValidatorTests
     {
         public class Dto
         {
-            public string TheWebCode { get; set; }
+            public string MyUsername { get; set; }
         }
 
         public class DtoValidator : AbstractValidator<Dto>
         {
             public DtoValidator()
             {
-                this.RuleFor(x => x.TheWebCode)
-                    .WebCode(2, 20);
+                this.RuleFor(x => x.MyUsername)
+                    .Username(2, 10);
             }
         }
 
         [Test]
-        [TestCase(null)]
         [TestCase("ak")]
-        [TestCase("some-note")]
-        [TestCase("1st-good-girl90")]
-        public void Validate_ValidWebCode_Ok(string webCode)
+        [TestCase("admin")]
+        [TestCase("1and1")]
+        [TestCase("1and1_go")]
+        public void Validate_ValidUsername_Ok(string username)
         {
             // Arrange
             var validator = new DtoValidator();
@@ -34,7 +34,7 @@ namespace TauCode.Validation.Test
             // Act
             var dto = new Dto
             {
-                TheWebCode = webCode,
+                MyUsername = username,
             };
 
             var result = validator.Validate(dto);
@@ -44,15 +44,12 @@ namespace TauCode.Validation.Test
         }
 
         [Test]
-        [TestCase("")]
         [TestCase("a")]
-        [TestCase("a-", Description = "Ends with separator")]
-        [TestCase("a--b", Description = "Two separators in a row")]
-        [TestCase("-a-b", Description = "Starts with separator")]
-        [TestCase("tooooooooooooo-looooooooooong")]
+        [TestCase("tooooooooooooo_looooooooooong")]
+        [TestCase("admin-2")]
+        [TestCase(" aka")]
         [TestCase("оля")]
-        [TestCase("tag1,tag2")]
-        public void Validate_InvalidWebCode_Error(string webCode)
+        public void Validate_InvalidUsername_Error(string username)
         {
             // Arrange
             var validator = new DtoValidator();
@@ -60,7 +57,7 @@ namespace TauCode.Validation.Test
             // Act
             var dto = new Dto
             {
-                TheWebCode = webCode,
+                MyUsername = username,
             };
 
             var result = validator.Validate(dto);
@@ -68,9 +65,8 @@ namespace TauCode.Validation.Test
             // Assert
             Assert.That(result.IsValid, Is.False);
             var error = result.Errors.Single();
-            Assert.That(error.ErrorCode, Is.EqualTo("WebCodeValidator"));
-            Assert.That(error.ErrorMessage, Is.EqualTo("'The Web Code' must be a valid web code."));
+            Assert.That(error.ErrorCode, Is.EqualTo("UsernameValidator"));
+            Assert.That(error.ErrorMessage, Is.EqualTo("'My Username' must be a valid username."));
         }
-
     }
 }

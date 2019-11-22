@@ -2,10 +2,10 @@
 using NUnit.Framework;
 using System.Linq;
 
-namespace TauCode.Validation.Test
+namespace TauCode.Validation.Tests
 {
     [TestFixture]
-    public class UppercaseValidatorTest
+    public class LowercaseValidatorTests
     {
         public class Dto
         {
@@ -17,15 +17,15 @@ namespace TauCode.Validation.Test
             public DtoValidator()
             {
                 this.RuleFor(x => x.TheCode)
-                    .UppercaseCode(2, 20);
+                    .LowercaseCode(2, 20);
             }
         }
 
         [Test]
         [TestCase(null)]
-        [TestCase("AK")]
-        [TestCase("SOME_NOTE")]
-        [TestCase("1ST_GOOD_GIRL90")]
+        [TestCase("ak")]
+        [TestCase("some_note")]
+        [TestCase("1st_good_girl90")]
         public void Validate_ValidCode_Ok(string code)
         {
             // Arrange
@@ -45,13 +45,13 @@ namespace TauCode.Validation.Test
 
         [Test]
         [TestCase("")]
-        [TestCase("A")]
-        [TestCase("A_", Description = "Ends with separator")]
-        [TestCase("A__B", Description = "Two separators in a row")]
-        [TestCase("_A_B", Description = "Starts with separator")]
-        [TestCase("TOOOOOOOOOOOOO_LOOOOOOOOOOONG")]
-        [TestCase("ОЛЯ")]
-        [TestCase("SOME_NoTE")]
+        [TestCase("a")]
+        [TestCase("a_", Description = "Ends with separator")]
+        [TestCase("a__b", Description = "Two separators in a row")]
+        [TestCase("_a_b", Description = "Starts with separator")]
+        [TestCase("tooooooooooooo_looooooooooong")]
+        [TestCase("оля")]
+        [TestCase("Some_note")]
         public void Validate_InvalidCode_Error(string code)
         {
             // Arrange
@@ -68,8 +68,8 @@ namespace TauCode.Validation.Test
             // Assert
             Assert.That(result.IsValid, Is.False);
             var error = result.Errors.Single();
-            Assert.That(error.ErrorCode, Is.EqualTo("UppercaseCodeValidator"));
-            Assert.That(error.ErrorMessage, Is.EqualTo("'The Code' must be a valid uppercase code."));
+            Assert.That(error.ErrorCode, Is.EqualTo("LowercaseCodeValidator"));
+            Assert.That(error.ErrorMessage, Is.EqualTo("'The Code' must be a valid lowercase code."));
         }
     }
 }
