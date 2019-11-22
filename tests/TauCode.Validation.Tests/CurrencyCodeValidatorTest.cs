@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System.Linq;
 
-namespace TauCode.Validation.Test
+namespace TauCode.Validation.Tests
 {
     [TestFixture]
     public class CurrencyCodeValidatorTest

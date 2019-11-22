@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TauCode.Validation.Test
+namespace TauCode.Validation.Tests
 {
     [TestFixture]
     public class CodeValidatorTest
