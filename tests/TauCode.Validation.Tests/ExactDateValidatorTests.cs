@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System;
 using System.Linq;
-using TauCode.Utils.Extensions;
+using TauCode.Extensions;
 
 namespace TauCode.Validation.Tests
 {
