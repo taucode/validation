@@ -14,7 +14,9 @@
     </releaseNotes>
     <tags>taucode validation</tags>
     <dependencies>
-      <dependency id="FluentValidation" version="8.6.0" />
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="FluentValidation" version="8.6.2" />
+      </group>
     </dependencies>
   </metadata>
   <files>
