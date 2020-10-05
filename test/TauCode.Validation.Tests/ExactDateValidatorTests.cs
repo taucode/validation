@@ -9,12 +9,12 @@ namespace TauCode.Validation.Tests
     [TestFixture]
     public class ExactDateValidatorTests
     {
-        private static DateTime? MinDate;
-        private static DateTime? MaxDate;
+        private static DateTimeOffset? MinDate;
+        private static DateTimeOffset? MaxDate;
 
         public class Dto
         {
-            public DateTime TheDate { get; set; }
+            public DateTimeOffset TheDate { get; set; }
         }
 
         public class DtoValidator : AbstractValidator<Dto>
@@ -63,7 +63,7 @@ namespace TauCode.Validation.Tests
             // Act
             var dto = new Dto
             {
-                TheDate = DateTime.Parse(dateString),
+                TheDate = DateTimeOffset.Parse(dateString),
             };
 
             var result = validator.Validate(dto);
@@ -113,7 +113,7 @@ namespace TauCode.Validation.Tests
             // Act
             var dto = new Dto
             {
-                TheDate = DateTime.Parse(dateString),
+                TheDate = DateTimeOffset.Parse(dateString),
             };
 
             var result = validator.Validate(dto);
@@ -141,7 +141,7 @@ namespace TauCode.Validation.Tests
             // Act
             var dto = new Dto
             {
-                TheDate = DateTime.Parse(dateString),
+                TheDate = DateTimeOffset.Parse(dateString),
             };
 
             var result = validator.Validate(dto);
@@ -165,7 +165,7 @@ namespace TauCode.Validation.Tests
             // Act
             var dto = new Dto
             {
-                TheDate = DateTime.Parse(dateString),
+                TheDate = DateTimeOffset.Parse(dateString),
             };
 
             var result = validator.Validate(dto);
@@ -191,7 +191,7 @@ namespace TauCode.Validation.Tests
 
             var dto = new Dto
             {
-                TheDate = DateTime.Parse(dateString),
+                TheDate = DateTimeOffset.Parse(dateString),
             };
 
             // Act
@@ -205,8 +205,8 @@ namespace TauCode.Validation.Tests
         }
 
         [Test]
-        [TestCase("DateTime.MinValue")]
-        [TestCase("DateTime.MaxValue")]
+        [TestCase("DateTimeOffset.MinValue")]
+        [TestCase("DateTimeOffset.MaxValue")]
         [TestCase("2010-08-09", Description = "Some value")]
         public void Validate_NoDatesProvidedValueIsValid_Ok(string dateString)
         {
@@ -216,19 +216,19 @@ namespace TauCode.Validation.Tests
 
             var validator = new DtoValidator();
 
-            DateTime date;
+            DateTimeOffset date;
 
-            if (dateString == "DateTime.MinValue")
+            if (dateString == "DateTimeOffset.MinValue")
             {
-                date = DateTime.MinValue;
+                date = DateTimeOffset.MinValue;
             }
-            else if (dateString == "DateTime.MaxValue")
+            else if (dateString == "DateTimeOffset.MaxValue")
             {
-                date = DateTime.MaxValue.Date;
+                date = DateTimeOffset.MaxValue.Date;
             }
             else
             {
-                date = DateTime.Parse(dateString);
+                date = DateTimeOffset.Parse(dateString);
             }
 
             var dto = new Dto
@@ -256,7 +256,7 @@ namespace TauCode.Validation.Tests
             // Act
             var dto = new Dto
             {
-                TheDate = DateTime.Parse(dateString),
+                TheDate = DateTimeOffset.Parse(dateString),
             };
 
             var result = validator.Validate(dto);
