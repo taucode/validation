@@ -7,10 +7,10 @@ namespace TauCode.Validation
     {
         private const string FORMAT = "yyyy-MM-dd";
 
-        private readonly DateTime? _minDate;
-        private readonly DateTime? _maxDate;
+        private readonly DateTimeOffset? _minDate;
+        private readonly DateTimeOffset? _maxDate;
 
-        public ExactDateValidator(DateTime? minDate, DateTime? maxDate, string message)
+        public ExactDateValidator(DateTimeOffset? minDate, DateTimeOffset? maxDate, string message)
             : base(message)
         {
             if (minDate.HasValue && minDate.Value != minDate.Value.Date)
@@ -35,21 +35,21 @@ namespace TauCode.Validation
 
         }
 
-        public ExactDateValidator(DateTime? minDate = null, DateTime? maxDate = null)
+        public ExactDateValidator(DateTimeOffset? minDate = null, DateTimeOffset? maxDate = null)
             : this(minDate, maxDate, "'{PropertyName}' must be an exact date{limitDescription}.")
         {
         }
 
         protected override bool IsValid(PropertyValidatorContext context)
         {
-            var date = (DateTime)context.PropertyValue;
+            var date = (DateTimeOffset)context.PropertyValue;
 
             var valid = true;
 
             do
             {
                 // must be exact
-                if (date != date.Date)
+                if (date.TimeOfDay != TimeSpan.Zero)
                 {
                     valid = false;
                     break;

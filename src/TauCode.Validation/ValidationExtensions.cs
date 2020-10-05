@@ -82,10 +82,10 @@ namespace TauCode.Validation
             return ruleBuilder.SetValidator(new CurrencyCodeValidator());
         }
 
-        public static IRuleBuilderOptions<T, DateTime> ExactDate<T>(
-            this IRuleBuilder<T, DateTime> ruleBuilder,
-            DateTime? minDate = null,
-            DateTime? maxDate = null)
+        public static IRuleBuilderOptions<T, DateTimeOffset> ExactDate<T>(
+            this IRuleBuilder<T, DateTimeOffset> ruleBuilder,
+            DateTimeOffset? minDate = null,
+            DateTimeOffset? maxDate = null)
         {
             return ruleBuilder.SetValidator(new ExactDateValidator(minDate, maxDate));
         }
