@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Validators;
 using System;
+using TauCode.Extensions;
 
 namespace TauCode.Validation
 {
@@ -13,12 +14,12 @@ namespace TauCode.Validation
         public ExactDateValidator(DateTimeOffset? minDate, DateTimeOffset? maxDate, string message)
             : base(message)
         {
-            if (minDate.HasValue && minDate.Value != minDate.Value.Date)
+            if (minDate.HasValue && !minDate.Value.IsUtcDateOffset())
             {
                 throw new ArgumentException($"When '{nameof(minDate)}' is provided, it must represent an exact date.", nameof(minDate));
             }
 
-            if (maxDate.HasValue && maxDate.Value != maxDate.Value.Date)
+            if (maxDate.HasValue && !maxDate.Value.IsUtcDateOffset())
             {
                 throw new ArgumentException($"When '{nameof(maxDate)}' is provided, it must represent an exact date.", nameof(maxDate));
             }
