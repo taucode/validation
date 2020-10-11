@@ -27,12 +27,12 @@ namespace TauCode.Validation.Tests
         }
 
         [Test]
-        [TestCase("2010-06-06")]
-        [TestCase("2011-01-01")]
+        [TestCase("2010-06-06Z")]
+        [TestCase("2011-01-01Z")]
         public void Validate_MinDateProvidedValueIsValid_Ok(string dateString)
         {
             // Arrange
-            MinDate = "2010-06-06".ToExactDate();
+            MinDate = "2010-06-06Z".ToUtcDateOffset();
             MaxDate = null;
 
             var validator = new DtoValidator();
@@ -40,7 +40,7 @@ namespace TauCode.Validation.Tests
             // Act
             var dto = new Dto
             {
-                TheDate = dateString.ToExactDate(),
+                TheDate = dateString.ToUtcDateOffset(),
             };
 
             var result = validator.Validate(dto);
@@ -51,11 +51,11 @@ namespace TauCode.Validation.Tests
 
         [Test]
         [TestCase("2010-04-03T19:22:41", Description = "Not exact")]
-        [TestCase("2010-06-05", Description = "Less than MinDate")]
+        [TestCase("2010-06-05Z", Description = "Less than MinDate")]
         public void Validate_MinDateProvidedValueIsInvalid_Error(string dateString)
         {
             // Arrange
-            MinDate = "2010-06-06".ToExactDate();
+            MinDate = "2010-06-06Z".ToUtcDateOffset();
             MaxDate = null;
 
             var validator = new DtoValidator();
@@ -76,20 +76,20 @@ namespace TauCode.Validation.Tests
         }
 
         [Test]
-        [TestCase("2010-06-06")]
-        [TestCase("2010-06-05")]
+        [TestCase("2010-06-06Z")]
+        [TestCase("2010-06-05Z")]
         public void Validate_MaxDateProvidedValueIsValid_Ok(string dateString)
         {
             // Arrange
             MinDate = null;
-            MaxDate = "2010-06-06".ToExactDate();
+            MaxDate = "2010-06-06Z".ToUtcDateOffset();
 
             var validator = new DtoValidator();
 
             // Act
             var dto = new Dto
             {
-                TheDate = dateString.ToExactDate(),
+                TheDate = dateString.ToUtcDateOffset(),
             };
 
             var result = validator.Validate(dto);
@@ -101,12 +101,12 @@ namespace TauCode.Validation.Tests
 
         [Test]
         [TestCase("2010-04-03T19:22:41", Description = "Not exact")]
-        [TestCase("2010-06-07", Description = "Greater than MaxDate")]
+        [TestCase("2010-06-07Z", Description = "Greater than MaxDate")]
         public void Validate_MaxDateProvidedValueIsInvalid_Error(string dateString)
         {
             // Arrange
             MinDate = null;
-            MaxDate = "2010-06-06".ToExactDate();
+            MaxDate = "2010-06-06Z".ToUtcDateOffset();
 
             var validator = new DtoValidator();
 
@@ -126,15 +126,15 @@ namespace TauCode.Validation.Tests
         }
 
         [Test]
-        [TestCase("2010-06-06")]
-        [TestCase("2010-06-07")]
-        [TestCase("2010-08-07")]
-        [TestCase("2010-08-08")]
+        [TestCase("2010-06-06Z")]
+        [TestCase("2010-06-07Z")]
+        [TestCase("2010-08-07Z")]
+        [TestCase("2010-08-08Z")]
         public void Validate_MinDateAndMaxDateProvidedValueIsValid_Ok(string dateString)
         {
             // Arrange
-            MinDate = "2010-06-06".ToExactDate();
-            MaxDate = "2010-08-08".ToExactDate();
+            MinDate = "2010-06-06Z".ToUtcDateOffset();
+            MaxDate = "2010-08-08Z".ToUtcDateOffset();
 
             var validator = new DtoValidator();
 
@@ -151,14 +151,14 @@ namespace TauCode.Validation.Tests
         }
 
         [Test]
-        [TestCase("2010-07-03T19:22:41", Description = "Not exact")]
-        [TestCase("2010-06-05", Description = "Less than MinDate")]
-        [TestCase("2010-08-09", Description = "Greater than MaxDate")]
+        [TestCase("2010-07-03T19:22:41Z", Description = "Not exact")]
+        [TestCase("2010-06-05Z", Description = "Less than MinDate")]
+        [TestCase("2010-08-09Z", Description = "Greater than MaxDate")]
         public void Validate_MinDateAndMaxDateProvidedValueIsInvalid_Error(string dateString)
         {
             // Arrange
-            MinDate = "2010-06-06".ToExactDate();
-            MaxDate = "2010-08-08".ToExactDate();
+            MinDate = "2010-06-06Z".ToUtcDateOffset();
+            MaxDate = "2010-08-08Z".ToUtcDateOffset();
 
             var validator = new DtoValidator();
 
@@ -178,14 +178,14 @@ namespace TauCode.Validation.Tests
         }
 
         [Test]
-        [TestCase("2010-07-03T19:22:41", Description = "Not exact")]
-        [TestCase("2010-06-05", Description = "Less than MinDate")]
-        [TestCase("2010-08-09", Description = "Greater than MaxDate")]
+        [TestCase("2010-07-03T19:22:41Z", Description = "Not exact")]
+        [TestCase("2010-06-05Z", Description = "Less than MinDate")]
+        [TestCase("2010-08-09Z", Description = "Greater than MaxDate")]
         public void Validate_MinDateAndMaxDateProvidedAndEqualValueIsInvalid_Error(string dateString)
         {
             // Arrange
-            MinDate = "2010-06-06".ToExactDate();
-            MaxDate = "2010-06-06".ToExactDate();
+            MinDate = "2010-06-06Z".ToUtcDateOffset();
+            MaxDate = "2010-06-06Z".ToUtcDateOffset();
 
             var validator = new DtoValidator();
 
@@ -272,8 +272,8 @@ namespace TauCode.Validation.Tests
         public void Constructor_MinDateGreaterThanMaxDate_ThrowsArgumentException()
         {
             // Arrange
-            var minDate = "2019-10-10".ToExactDate();
-            var maxDate = "2019-10-09".ToExactDate();
+            var minDate = "2019-10-10Z".ToUtcDateOffset();
+            var maxDate = "2019-10-09Z".ToUtcDateOffset();
 
             // Act & Assert
             var ex = Assert.Throws<ArgumentException>(() => new ExactDateValidator(minDate, maxDate));
@@ -286,8 +286,8 @@ namespace TauCode.Validation.Tests
         public void Constructor_MinDateNotExact_ThrowsArgumentException()
         {
             // Arrange
-            var minDate = "2010-10-10".ToExactDate().AddHours(14.88);
-            var maxDate = "2019-10-09".ToExactDate();
+            var minDate = "2010-10-10Z".ToUtcDateOffset().AddHours(14.88);
+            var maxDate = "2019-10-09Z".ToUtcDateOffset();
 
             // Act & Assert
             var ex = Assert.Throws<ArgumentException>(() => new ExactDateValidator(minDate, maxDate));
@@ -300,8 +300,8 @@ namespace TauCode.Validation.Tests
         public void Constructor_MaxDateNotExact_ThrowsArgumentException()
         {
             // Arrange
-            var minDate = "2010-10-10".ToExactDate();
-            var maxDate = "2019-10-09".ToExactDate().AddHours(14.88);
+            var minDate = "2010-10-10Z".ToUtcDateOffset();
+            var maxDate = "2019-10-09Z".ToUtcDateOffset().AddHours(14.88);
 
             // Act & Assert
             var ex = Assert.Throws<ArgumentException>(() => new ExactDateValidator(minDate, maxDate));
