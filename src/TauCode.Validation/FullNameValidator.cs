@@ -1,10 +1,13 @@
 ﻿using FluentValidation.Validators;
 using System;
 
+
 namespace TauCode.Validation
 {
-    public class FullNameValidator : PropertyValidator
+    public class FullNameValidator : PropertyValidatorWithMessage
     {
+        private const string DefaultMessage = "'{PropertyName}' must be a valid full name.";
+
         protected int MinLength { get; }
         protected int MaxLength { get; }
 
@@ -26,7 +29,7 @@ namespace TauCode.Validation
         }
 
         public FullNameValidator(int minLength, int maxLength)
-            : this(minLength, maxLength, "'{PropertyName}' must be a valid full name.")
+            : this(minLength, maxLength, DefaultMessage)
         {
         }
 
@@ -44,7 +47,7 @@ namespace TauCode.Validation
                 return false;
             }
 
-            if (char.IsWhiteSpace(name[0]) || char.IsWhiteSpace(name[name.Length - 1]))
+            if (char.IsWhiteSpace(name[0]) || char.IsWhiteSpace(name[^1]))
             {
                 return false;
             }

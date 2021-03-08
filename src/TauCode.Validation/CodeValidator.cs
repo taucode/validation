@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace TauCode.Validation
 {
-    public class CodeValidator : PropertyValidator
+    public class CodeValidator : PropertyValidatorWithMessage
     {
         protected int MaxLength { get; }
         protected int MinLength { get; }

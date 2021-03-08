@@ -39,17 +39,12 @@
                 return ValidationExtensions.EmptyChars;
             }
 
-            switch (separator.Value)
+            return separator.Value switch
             {
-                case '_':
-                    return ValidationExtensions.UnderscoreSeparator;
-
-                case '-':
-                    return ValidationExtensions.HyphenSeparator;
-
-                default:
-                    return new[] { separator.Value };
-            }
+                '_' => ValidationExtensions.UnderscoreSeparator,
+                '-' => ValidationExtensions.HyphenSeparator,
+                _ => new[] {separator.Value}
+            };
         }
 
         private static char[] ResolveAlphabet(bool digitsAllowed)

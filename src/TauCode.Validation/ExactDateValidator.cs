@@ -4,7 +4,7 @@ using TauCode.Extensions;
 
 namespace TauCode.Validation
 {
-    public class ExactDateValidator : PropertyValidator
+    public class ExactDateValidator : PropertyValidatorWithMessage
     {
         private const string FORMAT = "yyyy-MM-dd";
 
