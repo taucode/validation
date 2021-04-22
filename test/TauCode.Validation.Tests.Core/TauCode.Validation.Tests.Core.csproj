@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="10.0.4" />
-    <PackageReference Include="TauCode.Extensions" Version="1.3.2.7-dev-2021-04-20-18-55" />
+    <ProjectReference Include="..\..\src\TauCode.Validation\TauCode.Validation.csproj" />
   </ItemGroup>
 
 </Project>
