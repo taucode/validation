@@ -28,7 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{A898A9AF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TauCode.Validation.Tests", "test\TauCode.Validation.Tests\TauCode.Validation.Tests.csproj", "{E5340FDF-C18B-47AB-9331-90BBDCD1AD47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TauCode.Validation.Tests.Core", "test\TauCode.Validation.Tests.Core\TauCode.Validation.Tests.Core.csproj", "{5E0A53C5-5648-43BE-85CD-94BB818192E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TauCode.Validation.Tests.Core", "test\TauCode.Validation.Tests.Core\TauCode.Validation.Tests.Core.csproj", "{5E0A53C5-5648-43BE-85CD-94BB818192E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

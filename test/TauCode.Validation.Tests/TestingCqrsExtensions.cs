@@ -4,6 +4,11 @@ using System;
 using System.Globalization;
 using System.Text;
 
+
+
+// todo rename. why the hell 'cqrs'?
+// todo clean
+// todo notimpl - get rid of
 namespace TauCode.Validation.Tests
 {
     public static class TestingCqrsExtensions
