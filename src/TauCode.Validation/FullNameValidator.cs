@@ -1,15 +1,16 @@
-﻿using FluentValidation.Validators;
+﻿using FluentValidation;
+using FluentValidation.Validators;
 using System;
+
 
 namespace TauCode.Validation
 {
-    public class FullNameValidator : PropertyValidator
+    public class FullNameValidator<T> : PropertyValidator<T, string>
     {
         protected int MinLength { get; }
         protected int MaxLength { get; }
 
-        public FullNameValidator(int minLength, int maxLength, string message)
-            : base(message)
+        public FullNameValidator(int minLength, int maxLength, bool canBeNull)
         {
             if (minLength <= 0)
             {
@@ -23,39 +24,41 @@ namespace TauCode.Validation
 
             this.MinLength = minLength;
             this.MaxLength = maxLength;
+
+            this.CanBeNull = canBeNull;
         }
 
-        public FullNameValidator(int minLength, int maxLength)
-            : this(minLength, maxLength, "'{PropertyName}' must be a valid full name.")
-        {
-        }
+        public bool CanBeNull { get; }
 
-        protected override bool IsValid(PropertyValidatorContext context)
+        public override bool IsValid(ValidationContext<T> context, string value)
         {
-            var name = (string)context.PropertyValue;
 
-            if (name == null)
+            if (value == null)
             {
-                return true; // not our case
+                return this.CanBeNull;
             }
 
-            if (name.Length == 0)
+            if (value.Length == 0)
             {
                 return false;
             }
 
-            if (char.IsWhiteSpace(name[0]) || char.IsWhiteSpace(name[name.Length - 1]))
+            if (char.IsWhiteSpace(value[0]) || char.IsWhiteSpace(value[^1]))
             {
                 return false;
             }
 
-            if (name.Length < this.MinLength || name.Length > this.MaxLength)
+            if (value.Length < this.MinLength || value.Length > this.MaxLength)
             {
                 return false;
             }
 
             return true;
-
         }
+
+        protected override string GetDefaultMessageTemplate(string errorCode) =>
+            "'{PropertyName}' must be a valid full name.";
+
+        public override string Name => "FullNameValidator";
     }
 }

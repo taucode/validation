@@ -1,22 +1,24 @@
 ﻿using FluentValidation;
+using FluentValidation.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TauCode.Validation.Codes;
 
 namespace TauCode.Validation
 {
     public static class ValidationExtensions
     {
-        internal static readonly char[] EmptyChars = { };
-        internal static readonly char[] CapitalLatinLetters;
-        internal static readonly char[] CapitalLatinLettersAndDigits;
-        internal static readonly char[] SmallLatinLetters;
-        internal static readonly char[] SmallLatinLettersAndDigits;
-        internal static readonly char[] LatinLetters;
-        internal static readonly char[] LatinLettersAndDigits;
-        internal static readonly char[] Digits;
-        internal static readonly char[] HyphenSeparator = { '-' };
-        internal static readonly char[] UnderscoreSeparator = { '_' };
+        internal static readonly HashSet<char> EmptyChars = new HashSet<char>();
+        internal static readonly HashSet<char> CapitalLatinLetters;
+        internal static readonly HashSet<char> CapitalLatinLettersAndDigits;
+        internal static readonly HashSet<char> SmallLatinLetters;
+        internal static readonly HashSet<char> SmallLatinLettersAndDigits;
+        internal static readonly HashSet<char> LatinLetters;
+        internal static readonly HashSet<char> LatinLettersAndDigits;
+        internal static readonly HashSet<char> Digits;
+        internal static readonly HashSet<char> HyphenSeparator = new HashSet<char>(new[] { '-' });
+        internal static readonly HashSet<char> UnderscoreSeparator = new HashSet<char>(new[] { '_' });
 
         static ValidationExtensions()
         {
@@ -51,107 +53,46 @@ namespace TauCode.Validation
             latinLettersAndDigits.AddRange(latinLetters);
             latinLettersAndDigits.AddRange(digits);
 
-            CapitalLatinLetters = capitalLatinLetters.ToArray();
-            SmallLatinLetters = smallLatinLetters.ToArray();
-            LatinLetters = latinLetters.ToArray();
-            Digits = digits.ToArray();
-            SmallLatinLettersAndDigits = smallLatinLettersAndDigits.ToArray();
-            CapitalLatinLettersAndDigits = capitalLatinLettersAndDigits.ToArray();
-            LatinLettersAndDigits = latinLettersAndDigits.ToArray();
-        }
-
-        public static IRuleBuilderOptions<T, string> Code<T>(
-            this IRuleBuilder<T, string> ruleBuilder,
-            int minLength,
-            int maxLength,
-            char[] alphabet,
-            char[] startingChars,
-            char[] separators)
-        {
-            return ruleBuilder.SetValidator(new CodeValidator(
-                minLength,
-                maxLength,
-                alphabet,
-                startingChars,
-                separators));
+            CapitalLatinLetters = capitalLatinLetters.ToHashSet();
+            SmallLatinLetters = smallLatinLetters.ToHashSet();
+            LatinLetters = latinLetters.ToHashSet();
+            Digits = digits.ToHashSet();
+            SmallLatinLettersAndDigits = smallLatinLettersAndDigits.ToHashSet();
+            CapitalLatinLettersAndDigits = capitalLatinLettersAndDigits.ToHashSet();
+            LatinLettersAndDigits = latinLettersAndDigits.ToHashSet();
         }
 
         public static IRuleBuilderOptions<T, string> CurrencyCode<T>(
             this IRuleBuilder<T, string> ruleBuilder)
         {
-            return ruleBuilder.SetValidator(new CurrencyCodeValidator());
-        }
-
-        public static IRuleBuilderOptions<T, DateTime> ExactDate<T>(
-            this IRuleBuilder<T, DateTime> ruleBuilder,
-            DateTime? minDate = null,
-            DateTime? maxDate = null)
-        {
-            return ruleBuilder.SetValidator(new ExactDateValidator(minDate, maxDate));
-        }
-
-        public static IRuleBuilderOptions<T, string> Username<T>(
-            this IRuleBuilder<T, string> ruleBuilder,
-            int minLength = 1,
-            int maxLength = 100,
-            char? separator = '_',
-            bool lowercaseOnly = true,
-            bool digitsAllowed = true)
-        {
-            return ruleBuilder.SetValidator(new UsernameValidator(
-                minLength,
-                maxLength,
-                separator,
-                lowercaseOnly,
-                digitsAllowed));
+            return ruleBuilder.SetValidator(new CurrencyCodeValidator<T>());
         }
 
         public static IRuleBuilderOptions<T, string> FullName<T>(
             this IRuleBuilder<T, string> ruleBuilder,
             int minLength,
-            int maxLength)
+            int maxLength,
+            bool canBeNull)
         {
-            return ruleBuilder.SetValidator(new FullNameValidator(
-                minLength,
-                maxLength));
-        }
-
-        public static IRuleBuilderOptions<T, string> WebCode<T>(
-            this IRuleBuilder<T, string> ruleBuilder,
-            int minLength,
-            int maxLength)
-        {
-            return ruleBuilder.SetValidator(new WebCodeValidator(
-                minLength,
-                maxLength));
-        }
-
-        public static IRuleBuilderOptions<T, string> LowercaseCode<T>(
-            this IRuleBuilder<T, string> ruleBuilder,
-            int minLength = 1,
-            int maxLength = 100,
-            char? separator = '_',
-            bool digitsAllowed = true)
-        {
-            return ruleBuilder.SetValidator(new LowercaseCodeValidator(
+            return ruleBuilder.SetValidator(new FullNameValidator<T>(
                 minLength,
                 maxLength,
-                separator,
-                digitsAllowed));
+                canBeNull));
         }
 
-        public static IRuleBuilderOptions<T, string> UppercaseCode<T>(
-            this IRuleBuilder<T, string> ruleBuilder,
-            int minLength = 1,
-            int maxLength = 100,
-            char? separator = '_',
-            bool digitsAllowed = true)
+        public static IRuleBuilderOptions<T, TProperty?> WrapValueTypeValidator<T, TProperty>(
+            this IRuleBuilder<T, TProperty?> ruleBuilder,
+            PropertyValidator<T, TProperty> valueTypePropertyValidator)
+            where TProperty : struct
         {
-            return ruleBuilder.SetValidator(new UppercaseCodeValidator(
-                minLength,
-                maxLength,
-                separator,
-                digitsAllowed));
+            return ruleBuilder.SetValidator(
+                new ValueTypePropertyValidatorWrapper<T, TProperty>(valueTypePropertyValidator));
+        }
+
+        public static IRuleBuilderOptions<T, long> LongId<T>(
+            this IRuleBuilder<T, long> ruleBuilder)
+        {
+            return ruleBuilder.SetValidator(new LongIdValidator<T>());
         }
     }
 }
