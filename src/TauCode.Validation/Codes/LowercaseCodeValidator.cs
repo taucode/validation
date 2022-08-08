@@ -1,44 +1,40 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿namespace TauCode.Validation.Codes;
 
-namespace TauCode.Validation.Codes
+public class LowercaseCodeValidator<T> : CodeValidator<T>
 {
-    public class LowercaseCodeValidator<T> : CodeValidator<T>
+    public LowercaseCodeValidator(
+        int minLength,
+        int maxLength,
+        char? separator,
+        bool digitsAllowed)
+        : base(
+            minLength,
+            maxLength,
+            ResolveAlphabet(digitsAllowed),
+            ResolveAlphabet(digitsAllowed),
+            ResolveSeparators(separator))
     {
-        public LowercaseCodeValidator(
-            int minLength,
-            int maxLength,
-            char? separator,
-            bool digitsAllowed)
-            : base(
-                minLength,
-                maxLength,
-                ResolveAlphabet(digitsAllowed),
-                ResolveAlphabet(digitsAllowed),
-                ResolveSeparators(separator))
+    }
+
+    private static HashSet<char> ResolveSeparators(char? separator)
+    {
+        if (!separator.HasValue)
         {
+            return ValidationExtensions.EmptyChars;
         }
 
-        private static HashSet<char> ResolveSeparators(char? separator)
+        return separator.Value switch
         {
-            if (!separator.HasValue)
-            {
-                return ValidationExtensions.EmptyChars;
-            }
+            '_' => ValidationExtensions.UnderscoreSeparator,
+            '-' => ValidationExtensions.HyphenSeparator,
+            _ => new[] { separator.Value }.ToHashSet(),
+        };
+    }
 
-            return separator.Value switch
-            {
-                '_' => ValidationExtensions.UnderscoreSeparator,
-                '-' => ValidationExtensions.HyphenSeparator,
-                _ => new[] { separator.Value }.ToHashSet(),
-            };
-        }
-
-        private static HashSet<char> ResolveAlphabet(bool digitsAllowed)
-        {
-            return digitsAllowed
-                ? ValidationExtensions.SmallLatinLettersAndDigits
-                : ValidationExtensions.SmallLatinLetters;
-        }
+    private static HashSet<char> ResolveAlphabet(bool digitsAllowed)
+    {
+        return digitsAllowed
+            ? ValidationExtensions.SmallLatinLettersAndDigits
+            : ValidationExtensions.SmallLatinLetters;
     }
 }
