@@ -1,10 +1,7 @@
-﻿using System;
+﻿namespace TauCode.Validation.Tests.Core.Features.Watchers.GetWatcherCurrencies;
 
-namespace TauCode.Validation.Tests.Core.Features.Watchers.GetWatcherCurrencies
+public class GetWatcherCurrenciesQuery
 {
-    public class GetWatcherCurrenciesQuery
-    {
-        public long WatcherId { get; set; }
-        public DateTimeOffset? Date { get; set; }
-    }
+    public long WatcherId { get; set; }
+    public DateTimeOffset? Date { get; set; }
 }

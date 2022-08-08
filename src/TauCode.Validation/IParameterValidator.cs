@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
+﻿namespace TauCode.Validation;
 
-namespace TauCode.Validation
+public interface IParameterValidator
 {
-    public interface IParameterValidator
-    {
-        IDictionary<string, object> Parameters { get; set; }
-    }
+    IDictionary<string, object> Parameters { get; set; }
 }

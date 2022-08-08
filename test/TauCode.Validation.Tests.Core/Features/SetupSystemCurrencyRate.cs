@@ -1,8 +1,7 @@
-﻿namespace TauCode.Validation.Tests.Core.Features
+﻿namespace TauCode.Validation.Tests.Core.Features;
+
+public class SetupSystemCurrencyRate
 {
-    public class SetupSystemCurrencyRate
-    {
-        public string CurrencyCode { get; set; }
-        public decimal Rate { get; set; }
-    }
+    public string CurrencyCode { get; set; }
+    public decimal Rate { get; set; }
 }

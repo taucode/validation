@@ -1,35 +1,34 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
 
-namespace TauCode.Validation
+namespace TauCode.Validation;
+
+public class NullableNotEmptyValidator<T, TProperty> : NotEmptyValidator<T, TProperty?>
+    where TProperty : struct
 {
-    public class NullableNotEmptyValidator<T, TProperty> : NotEmptyValidator<T, TProperty?>
-        where TProperty : struct
+    private readonly NotEmptyValidator<T, TProperty> _underlyingNotEmptyValidator;
+
+    public NullableNotEmptyValidator()
     {
-        private readonly NotEmptyValidator<T, TProperty> _underlyingNotEmptyValidator;
+        _underlyingNotEmptyValidator = new NotEmptyValidator<T, TProperty>();
+    }
 
-        public NullableNotEmptyValidator()
+    public override string Name => _underlyingNotEmptyValidator.Name;
+
+
+    public override bool IsValid(ValidationContext<T> context, TProperty? value)
+    {
+        if (value.HasValue)
         {
-            _underlyingNotEmptyValidator = new NotEmptyValidator<T, TProperty>();
+            return _underlyingNotEmptyValidator.IsValid(context, value.Value);
         }
 
-        public override string Name => _underlyingNotEmptyValidator.Name;
+        return true;
+    }
 
-
-        public override bool IsValid(ValidationContext<T> context, TProperty? value)
-        {
-            if (value.HasValue)
-            {
-                return _underlyingNotEmptyValidator.IsValid(context, value.Value);
-            }
-
-            return true;
-        }
-
-        protected override string GetDefaultMessageTemplate(string errorCode)
-        {
-            IPropertyValidator casted = _underlyingNotEmptyValidator;
-            return casted.GetDefaultMessageTemplate(errorCode);
-        }
+    protected override string GetDefaultMessageTemplate(string errorCode)
+    {
+        IPropertyValidator casted = _underlyingNotEmptyValidator;
+        return casted.GetDefaultMessageTemplate(errorCode);
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace TauCode.Validation.Tests.Core.Features.Watchers.DeleteWatcher
+﻿namespace TauCode.Validation.Tests.Core.Features.Watchers.DeleteWatcher;
+
+public class DeleteWatcherCommand
 {
-    public class DeleteWatcherCommand
-    {
-        public long Id { get; set; }
-    }
+    public long Id { get; set; }
 }

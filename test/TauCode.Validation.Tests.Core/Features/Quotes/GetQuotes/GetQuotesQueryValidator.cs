@@ -1,20 +1,19 @@
 ﻿using FluentValidation;
 using TauCode.Validation.Tests.Core.Validators;
 
-namespace TauCode.Validation.Tests.Core.Features.Quotes.GetQuotes
+namespace TauCode.Validation.Tests.Core.Features.Quotes.GetQuotes;
+
+public class GetQuotesQueryValidator : AbstractValidator<GetQuotesQuery>
 {
-    public class GetQuotesQueryValidator : AbstractValidator<GetQuotesQuery>
+    public GetQuotesQueryValidator()
     {
-        public GetQuotesQueryValidator()
-        {
-            this.CascadeMode = CascadeMode.Stop;
+        this.CascadeMode = CascadeMode.Stop;
 
-            this.RuleFor(x => x.WatcherId)
-                .LongId();
+        this.RuleFor(x => x.WatcherId)
+            .LongId();
 
-            this.RuleFor(x => x.Date)
-                .WrapValueTypeValidator(new QuoteDateValidator<GetQuotesQuery>());
-            //.NullableQuoteDate();
-        }
+        this.RuleFor(x => x.Date)
+            .WrapValueTypeValidator(new QuoteDateValidator<GetQuotesQuery>());
+        //.NullableQuoteDate();
     }
 }

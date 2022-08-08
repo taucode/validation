@@ -1,11 +1,8 @@
-﻿using System;
+﻿namespace TauCode.Validation.Tests.Core.Features.Quotes.GetQuotes;
 
-namespace TauCode.Validation.Tests.Core.Features.Quotes.GetQuotes
+public class GetQuotesQuery
 {
-    public class GetQuotesQuery
-    {
-        public long WatcherId { get; set; }
+    public long WatcherId { get; set; }
 
-        public DateTimeOffset? Date { get; set; }
-    }
+    public DateTimeOffset? Date { get; set; }
 }
