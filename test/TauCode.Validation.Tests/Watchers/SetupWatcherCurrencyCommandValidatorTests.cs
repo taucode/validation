@@ -49,7 +49,7 @@ public class SetupWatcherCurrencyCommandValidatorTests : ValidatorTestBase<
                 0,
                 nameof(SetupWatcherCurrencyCommand.WatcherId),
                 "LongIdValidator",
-                "'WatcherId' must be a valid long Id.");
+                "'WatcherId' must be a valid Id.");
     }
 
     [Test]

@@ -47,7 +47,7 @@ public class RemoveWatcherCurrencyCommandValidatorTests : ValidatorTestBase<
                 0,
                 nameof(RemoveWatcherCurrencyCommand.WatcherId),
                 "LongIdValidator",
-                "'Watcher Id' must be a valid long Id.");
+                "'Watcher Id' must be a valid Id.");
     }
 
     [Test]

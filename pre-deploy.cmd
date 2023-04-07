@@ -1,9 +1,9 @@
 dotnet restore
 
-dotnet build --configuration Debug
-dotnet build --configuration Release
+dotnet build TauCode.Validation.sln -c Debug
+dotnet build TauCode.Validation.sln -c Release
 
-dotnet test -c Debug .\test\TauCode.Validation.Tests\TauCode.Validation.Tests.csproj
-dotnet test -c Release .\test\TauCode.Validation.Tests\TauCode.Validation.Tests.csproj
+dotnet test TauCode.Validation.sln -c Debug
+dotnet test TauCode.Validation.sln -c Release
 
 nuget pack nuget\TauCode.Validation.nuspec

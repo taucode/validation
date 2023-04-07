@@ -4,7 +4,6 @@ using FluentValidation.Validators;
 namespace TauCode.Validation;
 
 public class NullableNotEmptyValidator<T, TProperty> : NotEmptyValidator<T, TProperty?>
-    where TProperty : struct
 {
     private readonly NotEmptyValidator<T, TProperty> _underlyingNotEmptyValidator;
 
@@ -18,12 +17,12 @@ public class NullableNotEmptyValidator<T, TProperty> : NotEmptyValidator<T, TPro
 
     public override bool IsValid(ValidationContext<T> context, TProperty? value)
     {
-        if (value.HasValue)
+        if (value == null)
         {
-            return _underlyingNotEmptyValidator.IsValid(context, value.Value);
+            return true; // null is accepted
         }
 
-        return true;
+        return _underlyingNotEmptyValidator.IsValid(context, value);
     }
 
     protected override string GetDefaultMessageTemplate(string errorCode)

@@ -56,7 +56,7 @@ public class SetSystemWatcherQuotesCommandValidatorTests : ValidatorTestBase<
                 0,
                 nameof(SetSystemWatcherQuotesCommand.WatcherId),
                 "LongIdValidator",
-                "'WatcherId' must be a valid long Id.");
+                "'WatcherId' must be a valid Id.");
     }
 
     [Test]

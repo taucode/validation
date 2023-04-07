@@ -54,7 +54,7 @@ public class SetWatcherQuoteCommandValidatorTests : ValidatorTestBase<
                 0,
                 nameof(SetWatcherQuoteCommand.WatcherId),
                 "LongIdValidator",
-                "'WatcherId' must be a valid long Id.");
+                "'WatcherId' must be a valid Id.");
     }
 
     [Test]
@@ -151,7 +151,7 @@ public class SetWatcherQuoteCommandValidatorTests : ValidatorTestBase<
                 0,
                 nameof(SetWatcherQuoteCommand.SystemWatcherId),
                 "LongIdValidator",
-                "'SystemWatcherId' must be a valid long Id. This property is optional and can be null.");
+                "'SystemWatcherId' must be a valid Id. This property is optional and can be null.");
     }
 
     [Test]
