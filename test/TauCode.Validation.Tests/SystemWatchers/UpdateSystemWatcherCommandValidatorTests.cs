@@ -49,7 +49,7 @@ public class UpdateSystemWatcherCommandValidatorTests : ValidatorTestBase<
                 0,
                 nameof(UpdateSystemWatcherCommand.Id),
                 "LongIdValidator",
-                "'Id' must be a valid long Id.");
+                "'Id' must be a valid Id.");
     }
 
     [Test]

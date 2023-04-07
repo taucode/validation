@@ -4,9 +4,7 @@ using System.Globalization;
 using System.Text;
 
 
-
 // todo rename. why the hell 'cqrs'?
-// todo clean
 // todo notimpl - get rid of
 namespace TauCode.Validation.Tests;
 
@@ -39,18 +37,6 @@ public static class TestingCqrsExtensions
 
         return validationResult;
     }
-
-    //public static TId ToId<TId>(this string id) where TId : IdBase
-    //{
-    //    if (id == null)
-    //    {
-    //        return null;
-    //    }
-
-    //    return (TId)typeof(TId)
-    //        .GetConstructor(new[] { typeof(string) })
-    //        .Invoke(new object[] { id });
-    //}
 
     public static string SubstituteUsername(this string username)
     {
@@ -164,9 +150,7 @@ public static class TestingCqrsExtensions
             var len = code.Substring(1).ToInt32();
             var sb = new StringBuilder();
 
-            var times = len;
-
-            for (var i = 0; i < times; i++)
+            for (var i = 0; i < len; i++)
             {
                 sb.Append(c);
             }

@@ -101,7 +101,7 @@ public class GetCurrencyQueryValidatorTests : ValidatorTestBase<GetCurrencyQuery
                 0,
                 nameof(GetCurrencyQuery.Id),
                 "LongIdValidator",
-                "'Id' must be a valid long Id. This property is optional and can be null.");
+                "'Id' must be a valid Id. This property is optional and can be null.");
     }
 
     protected override GetCurrencyQuery CreateInstance()

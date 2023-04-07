@@ -98,7 +98,7 @@ public class GetWatcherQueryValidatorTests : ValidatorTestBase<GetWatcherQuery, 
                 0,
                 nameof(GetWatcherQuery.Id),
                 "LongIdValidator",
-                "'Id' must be a valid long Id. This property is optional and can be null.");
+                "'Id' must be a valid Id. This property is optional and can be null.");
     }
 
     [Test]

@@ -26,7 +26,7 @@ public class CodeValidator<T> : PropertyValidator<T, string>
 
         if (maxLength < minLength)
         {
-            throw new ArgumentException($"'{nameof(maxLength)}' must be not less than '{nameof(minLength)}'", nameof(maxLength));
+            throw new ArgumentException($"'{nameof(maxLength)}' cannot be less than '{nameof(minLength)}'.", nameof(maxLength));
         }
 
         if (alphabet == null)
@@ -49,7 +49,7 @@ public class CodeValidator<T> : PropertyValidator<T, string>
             throw new ArgumentException($"'{nameof(startingChars)}' cannot be empty.", nameof(startingChars));
         }
 
-        if (separators == null)
+        if (separators == null!)
         {
             throw new ArgumentNullException(nameof(separators));
         }
@@ -77,7 +77,7 @@ public class CodeValidator<T> : PropertyValidator<T, string>
         return this.StartingChars.Contains(c);
     }
 
-    public override bool IsValid(ValidationContext<T> context, string value)
+    public override bool IsValid(ValidationContext<T> context, string? value)
     {
         if (value == null)
         {

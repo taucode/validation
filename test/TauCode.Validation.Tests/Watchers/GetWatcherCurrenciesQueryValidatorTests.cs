@@ -52,7 +52,7 @@ public class GetWatcherCurrenciesQueryValidatorTests : ValidatorTestBase<
                 0,
                 nameof(GetWatcherCurrenciesQuery.WatcherId),
                 "LongIdValidator",
-                "'Watcher Id' must be a valid long Id.");
+                "'Watcher Id' must be a valid Id.");
     }
 
     [Test]
