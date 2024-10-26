@@ -20,7 +20,7 @@ public class SetWatcherQuoteCommandValidatorTests : ValidatorTestBase<
     [Test]
     [TestCase(null)]
     [TestCase("2012-01-02Z")]
-    public void Command_IsValid_Ok(string dateString)
+    public void Command_IsValid_Ok(string? dateString)
     {
         // Arrange
         var date = dateString.ToNullableUtcDateOffset();
@@ -64,7 +64,7 @@ public class SetWatcherQuoteCommandValidatorTests : ValidatorTestBase<
     [TestCase("EURO", Description = "Not 3 symbols")]
     [TestCase("USd", Description = "Not all upper-case")]
     [TestCase("RB.", Description = "Not all letters")]
-    public void CurrencyCode_IsBad_Error(string badCurrencyCode)
+    public void CurrencyCode_IsBad_Error(string? badCurrencyCode)
     {
         // Arrange
         var command = this.CreateInstance();
@@ -157,7 +157,7 @@ public class SetWatcherQuoteCommandValidatorTests : ValidatorTestBase<
     [Test]
     [TestCase("14.88", null)]
     [TestCase(null, 2L)]
-    public void RateAndSystemWatcherId_OnlyOneProvided_RunsOk(string rateString, long? systemWatcherId)
+    public void RateAndSystemWatcherId_OnlyOneProvided_RunsOk(string? rateString, long? systemWatcherId)
     {
         // Arrange
         var rate = rateString?.ToDecimal();
@@ -177,7 +177,7 @@ public class SetWatcherQuoteCommandValidatorTests : ValidatorTestBase<
     [Test]
     [TestCase("14.88", 1L)]
     [TestCase(null, null)]
-    public void RateAndSystemWatcherId_BothProvided_Error(string rateString, long? systemWatcherId)
+    public void RateAndSystemWatcherId_BothProvided_Error(string? rateString, long? systemWatcherId)
     {
         // Arrange
         var rate = rateString?.ToDecimal();

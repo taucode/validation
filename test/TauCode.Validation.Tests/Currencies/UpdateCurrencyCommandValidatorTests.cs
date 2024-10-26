@@ -79,7 +79,7 @@ public class UpdateCurrencyCommandValidatorTests : ValidatorTestBase<
     [TestCase("EURO", Description = "Not 3 symbols")]
     [TestCase("USd", Description = "Not all upper-case")]
     [TestCase("RB.", Description = "Not all letters")]
-    public void Code_IsInvalid_Error(string code)
+    public void Code_IsInvalid_Error(string? code)
     {
         // Arrange
         var command = this.CreateInstance();
@@ -126,7 +126,7 @@ public class UpdateCurrencyCommandValidatorTests : ValidatorTestBase<
         Description = "Too long")]
     [TestCase(" Andy ", Description = "Starts with spaces")]
     [TestCase("Andy ", Description = "Ends with spaces")]
-    public void Name_IsInvalid_Error(string name)
+    public void Name_IsInvalid_Error(string? name)
     {
         // Arrange
         var command = this.CreateInstance();

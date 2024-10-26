@@ -1,9 +1,14 @@
+2024-10-26
+==========
+    1. get rid of null-related warnings.
+
+2022-07-27
+==========
+    1. FluentValidation obsolete warnings: get rif of.
+
 2021-04-21
 ==========
 +   1. Get rid of `1 in ut-s.
 +   2. Unify: Null value is also acceptable
     3. Get rid of them todo-s and not-impl's.
 
-2022-07-27
-==========
-    1. FluentValidation obsolete warnings: get rif of.

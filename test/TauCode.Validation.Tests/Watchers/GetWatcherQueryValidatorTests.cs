@@ -46,7 +46,7 @@ public class GetWatcherQueryValidatorTests : ValidatorTestBase<GetWatcherQuery, 
     )]
     public void Query_PropertiesProvided_ReturnsProperResponse(
         long? id,
-        string guidString,
+        string? guidString,
         bool shouldBeOk)
     {
         // Arrange

@@ -19,7 +19,7 @@ public class GetWatcherCurrenciesQueryValidatorTests : ValidatorTestBase<
     [Test]
     [TestCase(null)]
     [TestCase("2019-03-03Z")]
-    public void Query_IsValid_RunsOk(string dateString)
+    public void Query_IsValid_RunsOk(string? dateString)
     {
         // Arrange
         var query = this.CreateInstance();

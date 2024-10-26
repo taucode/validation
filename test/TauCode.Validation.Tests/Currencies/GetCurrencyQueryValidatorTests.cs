@@ -16,7 +16,7 @@ public class GetCurrencyQueryValidatorTests : ValidatorTestBase<GetCurrencyQuery
     [Test]
     [TestCase(null, DataConstants.Currency.UsdCode)]
     [TestCase(DataConstants.Currency.UsdId, null)]
-    public void Query_ValidProperties_Ok(long? id, string code)
+    public void Query_ValidProperties_Ok(long? id, string? code)
     {
         // Arrange
         var query = this.CreateInstance();
@@ -34,7 +34,7 @@ public class GetCurrencyQueryValidatorTests : ValidatorTestBase<GetCurrencyQuery
     [Test]
     [TestCase(null, null)]
     [TestCase(DataConstants.Currency.UsdId, DataConstants.Currency.UsdCode)]
-    public void Query_BothOrNoneProvided_Error(long? id, string code)
+    public void Query_BothOrNoneProvided_Error(long? id, string? code)
     {
         // Arrange
         var query = this.CreateInstance();
