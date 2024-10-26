@@ -82,8 +82,8 @@ public class GetSystemWatcherQueryValidatorTests : ValidatorTestBase<
     )]
     public void Query_PropertiesProvided_ReturnsProperResponse(
         long? id,
-        string guidString,
-        string code,
+        string? guidString,
+        string? code,
         bool shouldBeOk)
     {
         // Arrange

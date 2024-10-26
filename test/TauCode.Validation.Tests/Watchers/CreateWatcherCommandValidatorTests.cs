@@ -72,7 +72,7 @@ public class CreateWatcherCommandValidatorTests : ValidatorTestBase<CreateWatche
     [TestCase("EURO", Description = "Not 3 symbols")]
     [TestCase("USd", Description = "Not all upper-case")]
     [TestCase("RB.", Description = "Not all letters")]
-    public void BasicCurrencyCode_IsBad_Error(string badCurrencyCode)
+    public void BasicCurrencyCode_IsBad_Error(string? badCurrencyCode)
     {
         // Arrange
         var command = this.CreateInstance();

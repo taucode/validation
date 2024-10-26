@@ -75,7 +75,7 @@ public class UpdateSystemWatcherCommandValidatorTests : ValidatorTestBase<
     [Test]
     [TestCase(null)]
     [TestCase("")]
-    public void Code_IsNullOrEmpty_Error(string watcherCode)
+    public void Code_IsNullOrEmpty_Error(string? watcherCode)
     {
         // Arrange
         var command = this.CreateInstance();

@@ -28,7 +28,7 @@ public class GetQuotesQueryValidatorTests : ValidatorTestBase<
     [Test]
     [TestCase(null)]
     [TestCase("2019-02-02Z")]
-    public void Query_IsValid_RunsOk(string dateString)
+    public void Query_IsValid_RunsOk(string? dateString)
     {
         // Arrange
         var query = this.CreateInstance();

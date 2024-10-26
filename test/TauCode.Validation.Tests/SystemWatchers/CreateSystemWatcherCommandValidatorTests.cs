@@ -74,7 +74,7 @@ public class CreateSystemWatcherCommandValidatorTests : ValidatorTestBase<
     [Test]
     [TestCase(null)]
     [TestCase("")]
-    public void WatcherCode_IsNullOrEmpty_Error(string watcherCode)
+    public void WatcherCode_IsNullOrEmpty_Error(string? watcherCode)
     {
         // Arrange
         var command = this.CreateInstance();
@@ -197,7 +197,7 @@ public class CreateSystemWatcherCommandValidatorTests : ValidatorTestBase<
     [TestCase("EURO", Description = "Not 3 symbols")]
     [TestCase("USd", Description = "Not all upper-case")]
     [TestCase("RB.", Description = "Not all letters")]
-    public void InitialCurrencyRates_CurrencyCodeIsInvalid_Error(string code)
+    public void InitialCurrencyRates_CurrencyCodeIsInvalid_Error(string? code)
     {
         // Arrange
         var command = this.CreateInstance();
