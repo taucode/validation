@@ -47,7 +47,7 @@ public class RemoveWatcherCurrencyCommandValidatorTests : ValidatorTestBase<
                 0,
                 nameof(RemoveWatcherCurrencyCommand.WatcherId),
                 "LongIdValidator",
-                "'Watcher Id' must be a valid long Id.");
+                "'Watcher Id' must be a valid Id.");
     }
 
     [Test]
@@ -77,7 +77,7 @@ public class RemoveWatcherCurrencyCommandValidatorTests : ValidatorTestBase<
     [TestCase("EURO", Description = "Not 3 symbols")]
     [TestCase("USd", Description = "Not all upper-case")]
     [TestCase("RB.", Description = "Not all letters")]
-    public void CurrencyCode_IsBad_Error(string badCurrencyCode)
+    public void CurrencyCode_IsBad_Error(string? badCurrencyCode)
     {
         // Arrange
         var command = this.CreateInstance();

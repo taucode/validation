@@ -82,8 +82,8 @@ public class GetSystemWatcherQueryValidatorTests : ValidatorTestBase<
     )]
     public void Query_PropertiesProvided_ReturnsProperResponse(
         long? id,
-        string guidString,
-        string code,
+        string? guidString,
+        string? code,
         bool shouldBeOk)
     {
         // Arrange
@@ -136,7 +136,7 @@ public class GetSystemWatcherQueryValidatorTests : ValidatorTestBase<
                 0,
                 nameof(GetSystemWatcherQuery.Id),
                 "LongIdValidator",
-                "'Id' must be a valid long Id. This property is optional and can be null.");
+                "'Id' must be a valid Id. This property is optional and can be null.");
     }
 
     [Test]

@@ -19,7 +19,7 @@ public class GetWatcherCurrenciesQueryValidatorTests : ValidatorTestBase<
     [Test]
     [TestCase(null)]
     [TestCase("2019-03-03Z")]
-    public void Query_IsValid_RunsOk(string dateString)
+    public void Query_IsValid_RunsOk(string? dateString)
     {
         // Arrange
         var query = this.CreateInstance();
@@ -52,7 +52,7 @@ public class GetWatcherCurrenciesQueryValidatorTests : ValidatorTestBase<
                 0,
                 nameof(GetWatcherCurrenciesQuery.WatcherId),
                 "LongIdValidator",
-                "'Watcher Id' must be a valid long Id.");
+                "'Watcher Id' must be a valid Id.");
     }
 
     [Test]

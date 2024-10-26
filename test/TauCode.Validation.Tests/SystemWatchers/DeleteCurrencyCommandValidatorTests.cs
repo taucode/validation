@@ -47,7 +47,7 @@ public class DeleteCurrencyCommandValidatorTests : ValidatorTestBase<
                 0,
                 nameof(DeleteSystemWatcherCommand.Id),
                 "LongIdValidator",
-                "'Id' must be a valid long Id.");
+                "'Id' must be a valid Id.");
     }
 
     [Test]

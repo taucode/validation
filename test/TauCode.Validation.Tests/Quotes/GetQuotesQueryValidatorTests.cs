@@ -28,7 +28,7 @@ public class GetQuotesQueryValidatorTests : ValidatorTestBase<
     [Test]
     [TestCase(null)]
     [TestCase("2019-02-02Z")]
-    public void Query_IsValid_RunsOk(string dateString)
+    public void Query_IsValid_RunsOk(string? dateString)
     {
         // Arrange
         var query = this.CreateInstance();
@@ -60,7 +60,7 @@ public class GetQuotesQueryValidatorTests : ValidatorTestBase<
                 0,
                 nameof(GetQuotesQuery.WatcherId),
                 "LongIdValidator",
-                "'Watcher Id' must be a valid long Id.");
+                "'Watcher Id' must be a valid Id.");
     }
 
     [Test]

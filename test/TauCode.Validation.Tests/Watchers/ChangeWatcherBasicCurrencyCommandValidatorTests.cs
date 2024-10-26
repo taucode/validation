@@ -49,7 +49,7 @@ public class ChangeWatcherBasicCurrencyCommandValidatorTests : ValidatorTestBase
                 0,
                 nameof(ChangeWatcherBasicCurrencyCommand.WatcherId),
                 "LongIdValidator",
-                "'WatcherId' must be a valid long Id.");
+                "'WatcherId' must be a valid Id.");
     }
 
     [Test]
@@ -79,7 +79,7 @@ public class ChangeWatcherBasicCurrencyCommandValidatorTests : ValidatorTestBase
     [TestCase("EURO", Description = "Not 3 symbols")]
     [TestCase("USd", Description = "Not all upper-case")]
     [TestCase("RB.", Description = "Not all letters")]
-    public void CurrencyCode_IsBad_Error(string badCurrencyCode)
+    public void CurrencyCode_IsBad_Error(string? badCurrencyCode)
     {
         // Arrange
         var command = this.CreateInstance();

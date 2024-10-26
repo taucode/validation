@@ -91,4 +91,16 @@ public static class ValidationExtensions
     {
         return ruleBuilder.SetValidator(new LongIdValidator<T>());
     }
+
+    public static IRuleBuilderOptions<T, short> ShortId<T>(
+        this IRuleBuilder<T, short> ruleBuilder)
+    {
+        return ruleBuilder.SetValidator(new ShortIdValidator<T>());
+    }
+
+    public static IRuleBuilderOptions<T, int> IntId<T>(
+        this IRuleBuilder<T, int> ruleBuilder)
+    {
+        return ruleBuilder.SetValidator(new IntIdValidator<T>());
+    }
 }

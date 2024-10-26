@@ -49,7 +49,7 @@ public class UpdateSystemWatcherCommandValidatorTests : ValidatorTestBase<
                 0,
                 nameof(UpdateSystemWatcherCommand.Id),
                 "LongIdValidator",
-                "'Id' must be a valid long Id.");
+                "'Id' must be a valid Id.");
     }
 
     [Test]
@@ -75,7 +75,7 @@ public class UpdateSystemWatcherCommandValidatorTests : ValidatorTestBase<
     [Test]
     [TestCase(null)]
     [TestCase("")]
-    public void Code_IsNullOrEmpty_Error(string watcherCode)
+    public void Code_IsNullOrEmpty_Error(string? watcherCode)
     {
         // Arrange
         var command = this.CreateInstance();

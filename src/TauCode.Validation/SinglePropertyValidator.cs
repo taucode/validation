@@ -18,7 +18,7 @@ public abstract class SinglePropertyValidator<T> : AbstractValidator<T>
             _inner = inner;
         }
 
-        public override bool IsValid(ValidationContext<T> context, object value)
+        public override bool IsValid(ValidationContext<T> context, object? value)
         {
             if (value == null)
             {
@@ -26,7 +26,17 @@ public abstract class SinglePropertyValidator<T> : AbstractValidator<T>
             }
 
             var method = _inner.GetType().GetMethod(nameof(IsValid));
-            var res = (bool)method.Invoke(_inner, new object[] { context, value }); // todo null check
+
+            if (method == null)
+            {
+                throw new MissingMethodException(this.GetType().FullName, nameof(IsValid));
+            }
+
+            var res = (bool)(
+                method.Invoke(_inner, new object[] { context, value })
+                ??
+                // should never happen, actually.
+                throw new NullReferenceException($"Method '{nameof(IsValid)}' returned null instead of boolean value."));
 
             return res;
         }
@@ -52,7 +62,8 @@ public abstract class SinglePropertyValidator<T> : AbstractValidator<T>
     {
         // todo: check args, incl. not empty collection
 
-        this.CascadeMode = CascadeMode.Stop;
+        this.RuleLevelCascadeMode = CascadeMode.Stop;
+
         _propertyInfos = this.BuildPropertyInfos(propertyValidators.Keys);
 
         var message = this.BuildMessage();
